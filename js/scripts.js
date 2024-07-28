@@ -42,6 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
         repoContainer.appendChild(card);
     }
 
+    // Hide/show header on scroll
+    let lastScrollTop = 0;
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+            header.classList.add('hide');
+        } else {
+            header.classList.remove('hide');
+        }
+        lastScrollTop = scrollTop;
+    });
+
     // Intersection Observer for scroll animations
     const elementsToAnimate = document.querySelectorAll('header, .intro, #search-bar, .repo-container, footer');
     const observerOptions = {
@@ -51,26 +64,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                entry.target.classList.add('animate');
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    elementsToAnimate.forEach(element => observer.observe(element));
-});
-
-function filterRepos() {
-    const input = document.getElementById('search-bar').value.toLowerCase();
-    const cards = document.querySelectorAll('.repo-card');
-    
-    cards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const description = card.querySelector('p').textContent.toLowerCase();
-        if (title.includes(input) || description.includes(input)) {
-            card.style.display = '';
-        } else {
-            card.style.display = 'none';
-        }
+    elementsToAnimate.forEach(element => {
+        observer.observe(element);
     });
-}
+
+    // Search functionality
+    document.getElementById('search-bar').addEventListener('keyup', filterRepos);
+
+    function filterRepos() {
+        const input = document.getElementById('search-bar').value.toLowerCase();
+        const cards = document.querySelectorAll('.repo-card');
+        cards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const description = card.querySelector('p').textContent.toLowerCase();
+            if (title.includes(input) || description.includes(input)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+});
