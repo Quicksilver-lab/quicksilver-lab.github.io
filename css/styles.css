@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
     color: #fff;
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@ body {
 }
 
 header {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 20px;
     position: sticky;
     top: 0;
@@ -23,7 +23,7 @@ header {
 }
 
 header:hover {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 1);
 }
 
 header .logo {
@@ -67,7 +67,12 @@ main {
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 1s forwards 1.5s;
+    transition: box-shadow 0.3s ease;
+}
+
+#search-bar:focus {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    outline: none;
 }
 
 .repo-container {
@@ -86,17 +91,18 @@ main {
     font-size: 1rem;
     cursor: pointer;
     border-radius: 5px;
-    transition: transform 0.3s, background-color 0.3s;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .repo-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     background-color: #21a1f1;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 footer {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 10px 0;
     width: 100%;
