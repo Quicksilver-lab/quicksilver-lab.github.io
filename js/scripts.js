@@ -4,11 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch repositories from GitHub
     fetch(`https://api.github.com/users/${username}/repos`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
         .then(data => {
-            data.forEach(repo => {
-                createRepoButton(repo);
-            });
+            if (data.length === 0) {
+                repoContainer.innerHTML = '<p>No repositories found.</p>';
+            } else {
+                data.forEach(repo => {
+                    createRepoButton(repo);
+                });
+            }
         })
         .catch(error => console.error('Error fetching repositories:', error));
 
