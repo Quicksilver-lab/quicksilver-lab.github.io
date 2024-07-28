@@ -83,22 +83,42 @@ main {
     animation: fadeInUp 1s forwards 2s;
 }
 
-.repo-button {
-    background-color: #61dafb;
-    color: #282c34;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+.repo-card {
+    background-color: #fff;
+    color: #333;
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.repo-button:hover {
-    transform: scale(1.05);
-    background-color: #21a1f1;
+.repo-card:hover {
+    transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.repo-card h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #4e54c8;
+}
+
+.repo-card p {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #555;
+}
+
+.repo-card a {
+    text-decoration: none;
+    color: #4e54c8;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.repo-card a:hover {
+    color: #8f94fb;
 }
 
 footer {
@@ -132,9 +152,8 @@ footer {
     #search-bar {
         width: 100%;
     }
-    .repo-button {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+    .repo-card {
+        width: 80%;
     }
 }
 
@@ -151,8 +170,7 @@ footer {
     #search-bar {
         font-size: 0.9rem;
     }
-    .repo-button {
-        padding: 8px 15px;
-        font-size: 0.8rem;
+    .repo-card {
+        width: 100%;
     }
 }
