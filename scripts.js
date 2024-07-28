@@ -1,22 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     const repoContainer = document.querySelector('.repo-container');
-    
-    // List of repositories
-    const repositories = [
-        { name: 'Repo 1', link: 'https://github.com/Quicksilver-lab/repo1' },
-        { name: 'Repo 2', link: 'https://github.com/Quicksilver-lab/repo2' },
-        { name: 'Repo 3', link: 'https://github.com/Quicksilver-lab/repo3' },
-        // Add more repositories here
-    ];
-    
-    // Create buttons for each repository
-    repositories.forEach(repo => {
+    const username = 'Quicksilver-lab'; // Your GitHub username
+
+    // Fetch repositories from GitHub
+    fetch(`https://api.github.com/users/${username}/repos`)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(repo => {
+                createRepoButton(repo);
+            });
+        })
+        .catch(error => console.error('Error fetching repositories:', error));
+
+    function createRepoButton(repo) {
         const button = document.createElement('button');
         button.classList.add('repo-button');
         button.textContent = repo.name;
-        button.onclick = () => window.open(repo.link, '_blank');
+        button.onclick = () => window.open(repo.html_url, '_blank');
         repoContainer.appendChild(button);
-    });
+    }
 
     // Intersection Observer for scroll animations
     const elementsToAnimate = document.querySelectorAll('header, .intro, #search-bar, .repo-container, footer');
