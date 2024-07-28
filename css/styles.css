@@ -11,7 +11,7 @@ body {
 header {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 20px;
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
@@ -19,11 +19,11 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background-color 0.5s;
+    transition: transform 0.3s ease, background-color 0.5s;
 }
 
-header:hover {
-    background-color: rgba(0, 0, 0, 1);
+header.hide {
+    transform: translateY(-100%);
 }
 
 header .logo {
@@ -51,7 +51,7 @@ p {
 }
 
 main {
-    padding: 40px 20px;
+    padding-top: 100px; /* To ensure content is not hidden behind the header */
 }
 
 .intro {
