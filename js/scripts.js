@@ -15,18 +15,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 repoContainer.innerHTML = '<p>No repositories found.</p>';
             } else {
                 data.forEach(repo => {
-                    createRepoButton(repo);
+                    createRepoCard(repo);
                 });
             }
         })
         .catch(error => console.error('Error fetching repositories:', error));
 
-    function createRepoButton(repo) {
-        const button = document.createElement('button');
-        button.classList.add('repo-button');
-        button.textContent = repo.name;
-        button.onclick = () => window.open(repo.html_url, '_blank');
-        repoContainer.appendChild(button);
+    function createRepoCard(repo) {
+        const card = document.createElement('div');
+        card.classList.add('repo-card');
+        
+        const cardTitle = document.createElement('h3');
+        cardTitle.textContent = repo.name;
+        card.appendChild(cardTitle);
+        
+        const cardDescription = document.createElement('p');
+        cardDescription.textContent = repo.description || 'No description available';
+        card.appendChild(cardDescription);
+        
+        const cardLink = document.createElement('a');
+        cardLink.href = repo.html_url;
+        cardLink.textContent = 'View Repository';
+        cardLink.target = '_blank';
+        card.appendChild(cardLink);
+        
+        repoContainer.appendChild(card);
     }
 
     // Intersection Observer for scroll animations
@@ -49,14 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function filterRepos() {
     const input = document.getElementById('search-bar').value.toLowerCase();
-    const buttons = document.querySelectorAll('.repo-button');
+    const cards = document.querySelectorAll('.repo-card');
     
-    buttons.forEach(button => {
-        const text = button.textContent.toLowerCase();
-        if (text.includes(input)) {
-            button.style.display = '';
+    cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const description = card.querySelector('p').textContent.toLowerCase();
+        if (title.includes(input) || description.includes(input)) {
+            card.style.display = '';
         } else {
-            button.style.display = 'none';
+            card.style.display = 'none';
         }
     });
 }
