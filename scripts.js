@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Intersection Observer for scroll animations
-    const elementsToAnimate = document.querySelectorAll('header, h2, p, #search-bar, .repo-container');
+    const elementsToAnimate = document.querySelectorAll('header, .intro, #search-bar, .repo-container, footer');
     const observerOptions = {
         threshold: 0.1,
     };
